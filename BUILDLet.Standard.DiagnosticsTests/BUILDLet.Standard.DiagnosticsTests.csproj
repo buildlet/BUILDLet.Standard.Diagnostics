@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <RootNamespace>BUILDLet.Standard.Diagnostics.Tests</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <Version>1.1.0</Version>
+    <Authors>Daiki Sakamoto</Authors>
+    <Company>BUILDLet</Company>
+    <Description>Unit Tests for BUILDLet.Standard.DiagnosticsTests</Description>
+    <Copyright>© 2019 Daiki Sakamoto</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/buildlet/BUILDLet.Standard.Diagnostics</PackageProjectUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BUILDLet.Standard.UnitTest" Version="1.1.0-beta3" />
+    <PackageReference Include="BUILDLet.UnitTest.Utilities" Version="1.1.0-beta3" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.0.0" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.0.0" />
+    <PackageReference Include="coverlet.collector" Version="1.1.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BUILDLet.Standard.Diagnostics\BUILDLet.Standard.Diagnostics.csproj" />
+  </ItemGroup>
+
+</Project>

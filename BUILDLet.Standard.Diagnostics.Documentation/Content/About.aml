@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<topic id="3a3611b3-6d42-405b-b285-bd4194cdbbe0" revisionNumber="1">
+	<developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<introduction>
+      <para>
+        This is Help Documentation of <application>BUILDLet Class Library (Diagnostics) for .NET Standard</application>.
+      </para>
+    </introduction>
+
+		<section>
+			<title>Namespaces</title>
+			<content>
+        <para>This Help Documentation describes about the following namespaces.</para>
+
+        <table>
+
+          <!-- Table Header -->
+          <tableHeader>
+            <row>
+              <entry>
+                <para>Namespace</para>
+              </entry>
+              <entry>
+                <para>Description</para>
+              </entry>
+            </row>
+          </tableHeader>
+
+          <!-- BUILDLet.UnitTest.Utilities -->
+          <row>
+            <entry>
+              <para>
+                <codeEntityReference qualifyHint="true">N:BUILDLet.Standard.Diagnostics</codeEntityReference>
+              </para>
+            </entry>
+            <entry>
+              <para>
+                <!-- Namespace Summaries -->
+                <codeEntityReference qualifyHint="true">N:BUILDLet.Standard.Diagnostics</codeEntityReference>
+                名前空間には、デバッグのためのクラスが含まれます。
+              </para>
+            </entry>
+          </row>
+
+        </table>
+
+      </content>
+		</section>
+
+		<relatedTopics>
+			<link xlink:href="ceb4a480-ad5e-40fa-a04c-012d8cec8837" />
+		</relatedTopics>
+	</developerConceptualDocument>
+</topic>

@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="ceb4a480-ad5e-40fa-a04c-012d8cec8837" revisionNumber="1">
+	<developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<introduction>
+      <para>
+        The topics in this section describe the various changes made to the
+        <application>BUILDLet Class Library (Diagnostics) for .NET Standard</application>
+        over the life of the project.
+      </para>
+    </introduction>
+
+		<section>
+			<title>Version History</title>
+			<content>
+				<para>Select a version below to see a description of its changes.</para>
+
+				<list class="bullet">
+
+          <!-- Version 1.0.4.0 -->
+          <listItem>
+            <para>
+              <link xlink:href="7c7ec9d4-8433-474d-b0fe-87cb3d4ec0a8" />
+            </para>
+          </listItem>
+
+          <!-- Version 1.1.0.0 -->
+          <listItem>
+            <para>
+              <link xlink:href="68e4be1c-c3e6-4c48-a6e0-be705e23959f" />
+            </para>
+          </listItem>
+
+          <!--
+          <listItem>
+						<para>
+            	[TODO: Add links to each specific version page]
+            </para>
+					</listItem>
+          -->
+
+        </list>
+
+			</content>
+		</section>
+
+		<relatedTopics>
+			<link xlink:href="3a3611b3-6d42-405b-b285-bd4194cdbbe0" />
+		</relatedTopics>
+
+	</developerConceptualDocument>
+</topic>
