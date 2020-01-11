@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Version>1.1.0</Version>
+    <Version>1.2.0</Version>
     <Authors>Daiki Sakamoto</Authors>
     <Company>BUILDLet</Company>
     <Copyright>© 2019 Daiki Sakamoto</Copyright>

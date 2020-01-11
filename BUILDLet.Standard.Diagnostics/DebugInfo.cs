@@ -28,16 +28,18 @@ using System.Diagnostics; // for StackFrame Class
 namespace BUILDLet.Standard.Diagnostics
 {
     /// <summary>
-    /// ログ出力などに埋め込むためのデバッグ情報の文字列を実装します。
-    /// <para>
-    /// このクラスは静的クラスです。
-    /// 必要に応じて <see cref="DebugInfo.Init()"/> または <see cref="DebugInfo.Init(DebugInfoCallerNameFormat, string, CultureInfo)"/> メソッドでプロパティの値を初期化してください。
-    /// </para>
+    /// ログ出力などに埋め込むデバッグ情報のための文字列を提供します。
     /// </summary>
     /// <remarks>
-    /// このクラスはデバッグ ビルドでのみ使用することを推奨します。
+    /// <para>
+    /// このクラスは静的クラスです。
+    /// 必要に応じて <see cref="DebugInfo.Init()" autoUpgrade="true"/> メソッドでプロパティの値を初期化してください。
+    /// </para>
+    /// <para>
+    /// このクラスはデバッグ ビルドでのみ使用することを推奨します。<br/>
     /// <see cref="StackFrame"/> クラスを使用してクラス名やメソッド名の取得しているため、
     /// リリース ビルドでは、コンパイラの最適化のために正しいクラス名やメソッド名が取得できない場合があります。
+    /// </para>
     /// </remarks>
     public static class DebugInfo
     {
@@ -46,7 +48,7 @@ namespace BUILDLet.Standard.Diagnostics
 
 
         /// <summary>
-        /// <see cref="DebugInfo"/> クラスの静的コンストラクター
+        /// <see cref="DebugInfo"/> クラスを初期化します。
         /// </summary>
         static DebugInfo() { DebugInfo.Init(); }
 
@@ -65,17 +67,16 @@ namespace BUILDLet.Standard.Diagnostics
         /// <see cref="DebugInfo"/> クラスを初期化します。
         /// </summary>
         /// <param name="caller">
-        /// <see cref="DebugInfo.CallerNameFormat"/> に設定するクラス名およびメソッド名の形式を指定します。
-        /// 既定では <see cref="DebugInfo.DefaultCallerNameFormat"/> です。
+        /// <see cref="DebugInfo.CallerNameFormat"/> に設定するメソッド呼び出し元の表示形式を指定します。
         /// </param>
         /// <param name="format">
         /// <see cref="DebugInfo.TimeStampFormat"/> に設定する書式指定文字列を指定します。
-        /// 既定では <see cref="DebugInfo.DefaultTimeStampFormat"/> です。
         /// </param>
         /// <param name="culture">
         /// タイムスタンプを表示する際に使用されるカルチャー (<see cref="CultureInfo"/>) を指定します。
-        /// null を指定すると、既定のカルチャー （<see cref="DebugInfo.DefaultCultureInfo"/>) が設定されます。
-        /// 既定では null です。
+        /// <para>
+        /// <c>null</c> を指定すると、既定のカルチャー （<see cref="DebugInfo.DefaultCultureInfo"/>) が設定されます。
+        /// </para>
         /// </param>
         public static void Init(DebugInfoCallerNameFormat caller = DebugInfo.DefaultCallerNameFormat, string format = DebugInfo.DefaultTimeStampFormat, CultureInfo culture = null)
         {
@@ -86,29 +87,31 @@ namespace BUILDLet.Standard.Diagnostics
 
 
         /// <summary>
-        /// 呼び出し元メソッド名の既定の表示形式を表します。
-        /// <see cref="DebugInfoCallerNameFormat.FullName"/> です。
+        /// 呼び出し元の既定の表示形式を表します。
         /// </summary>
         public const DebugInfoCallerNameFormat DefaultCallerNameFormat = DebugInfoCallerNameFormat.FullName;
 
 
         /// <summary>
         /// タイムスタンプの既定の表示形式の書式指定文字列を表します。
-        /// 書式指定文字列は "yyyy/MM/dd-HH:mm:ss" です。
         /// </summary>
         public const string DefaultTimeStampFormat = "yyyy/MM/dd-HH:mm:ss";
 
 
         /// <summary>
         /// タイムスタンプの書式指定に使用される既定のカルチャー (<see cref="CultureInfo"/>) を表します。
-        /// 既定のカルチャーの名前は "en-US" です。
+        /// <para>
+        /// 既定のカルチャーの名前は <c>en-US</c> です。
+        /// </para>
         /// </summary>
         public static CultureInfo DefaultCultureInfo { get; } = new CultureInfo("en-US");
 
 
         /// <summary>
         /// 表示するクラス名およびメソッド名の形式を設定または取得します。
+        /// <para>
         /// 既定の設定は <see cref="DebugInfo.DefaultCallerNameFormat"/> です。
+        /// </para>
         /// </summary>
         public static DebugInfoCallerNameFormat CallerNameFormat { get; set; } = DebugInfo.DefaultCallerNameFormat;
 
@@ -134,131 +137,83 @@ namespace BUILDLet.Standard.Diagnostics
 
 
         /// <summary>
-        /// デバッグ情報として、呼び出し元のメソッド名のみを文字列として取得します。
+        /// 呼び出し元のメソッド名のみを文字列として取得します。
         /// </summary>
-        public static string Name
-        {
-            get
-            {
-                return DebugInfo.GetCallerName(DebugInfoCallerNameFormat.Name, 2);
-            }
-        }
+        public static string Name => DebugInfo.GetCallerName(DebugInfoCallerNameFormat.Name, 2);
 
 
         /// <summary>
-        /// デバッグ情報として、呼び出し元のクラス名とメソッド名のみを文字列として取得します。
+        /// 呼び出し元のクラス名とメソッド名のみを文字列として取得します。
         /// </summary>
-        public static string ShortName
-        {
-            get
-            {
-                return DebugInfo.GetCallerName(DebugInfoCallerNameFormat.ShortName, 2);
-            }
-        }
+        public static string ShortName => DebugInfo.GetCallerName(DebugInfoCallerNameFormat.ShortName, 2);
 
 
         /// <summary>
-        /// デバッグ情報として、呼び出し元のメソッド名の完全修飾名のみを文字列として取得します。
+        /// 呼び出し元のメソッド名の完全修飾名のみを文字列として取得します。
         /// </summary>
-        public static string FullName
-        {
-            get
-            {
-                return DebugInfo.GetCallerName(DebugInfoCallerNameFormat.FullName, 2);
-            }
-        }
+        public static string FullName => DebugInfo.GetCallerName(DebugInfoCallerNameFormat.FullName, 2);
 
 
         /// <summary>
-        /// デバッグ情報として、呼び出し元のクラス名のみを文字列として取得します。
+        /// 呼び出し元のクラス名のみを文字列として取得します。
         /// </summary>
-        public static string ClassName
-        {
-            get
-            {
-                return DebugInfo.GetCallerName(DebugInfoCallerNameFormat.ClassName, 2);
-            }
-        }
+        public static string ClassName => DebugInfo.GetCallerName(DebugInfoCallerNameFormat.ClassName, 2);
 
 
         /// <summary>
-        /// デバッグ情報として、呼び出し元のクラス名の完全修飾名のみを文字列として取得します。
+        /// 呼び出し元のクラス名の完全修飾名のみを文字列として取得します。
         /// </summary>
-        public static string FullClassName
-        {
-            get
-            {
-                return DebugInfo.GetCallerName(DebugInfoCallerNameFormat.FullClassName, 2);
-            }
-        }
+        public static string FullClassName => DebugInfo.GetCallerName(DebugInfoCallerNameFormat.FullClassName, 2);
 
 
         /// <summary>
         /// 現在時刻を、日付のみを含む文字列として取得します。
-        /// 書式指定文字列は "yyyy/MM/dd" です。
+        /// 書式指定文字列は <c>yyyy/MM/dd</c> です。
         /// </summary>
-        public static string Date
-        {
-            get
-            {
-                return System.DateTime.Now.ToString("yyyy/MM/dd", new CultureInfo("en-US"));
-            }
-        }
+        public static string Date => System.DateTime.Now.ToString("yyyy/MM/dd", new CultureInfo("en-US"));
 
 
         /// <summary>
         /// 現在時刻を、時刻のみを含む文字列として取得します。
-        /// 書式指定文字列は "HH:mm:ss" です。
+        /// 書式指定文字列は <c>HH:mm:ss</c> です。
         /// </summary>
-        public static string Time
-        {
-            get
-            {
-                return System.DateTime.Now.ToString("HH:mm:ss", new CultureInfo("en-US"));
-            }
-        }
+        public static string Time => System.DateTime.Now.ToString("HH:mm:ss", new CultureInfo("en-US"));
 
 
         /// <summary>
         /// 現在時刻を、現在の <see cref="DebugInfo.TimeStampFormat"/> および <see cref="DebugInfo.CultureInfo"/> でフォーマットされた文字列として取得します。
         /// </summary>
         /// <returns>
-        /// 現在時刻の文字列
+        /// 現在時刻を表す文字列。
         /// </returns>
-        public static string GetTimeStamp()
-        {
-            return System.DateTime.Now.ToString(DebugInfo.TimeStampFormat, DebugInfo.CultureInfo);
-        }
+        public static string GetTimeStamp() => System.DateTime.Now.ToString(DebugInfo.TimeStampFormat, DebugInfo.CultureInfo);
 
 
         /// <summary>
-        /// デバッグ情報として、呼び出し元のメソッド名を文字列として取得します。
+        /// このメソッドの呼び出し元のメソッド名を文字列として取得します。
         /// 表示形式は <see cref="DebugInfo.CallerNameFormat"/> です。
         /// </summary>
         /// <returns>
-        /// 呼び出し元メソッド名の文字列
+        /// 呼び出し元メソッド名を表す文字列。
         /// </returns>
-        public static string GetCallerName()
-        {
-            return DebugInfo.GetCallerName(DebugInfo.CallerNameFormat, 2);
-        }
+        public static string GetCallerName() => DebugInfo.GetCallerName(DebugInfo.CallerNameFormat, 2);
 
 
         /// <summary>
-        /// 書式のクラス名およびメソッド名を取得します。
+        /// このメソッドの呼び出し元のクラス名およびメソッド名を取得します。
         /// </summary>
         /// <param name="format">
-        /// 取得する書式のクラス名およびメソッド名のフォーマットを指定します。
+        /// 取得する書式のクラス名およびメソッド名のフォーマット。
         /// </param>
         /// <param name="skipFrames">
-        /// スキップするスタック上のフレーム数
+        /// スキップするスタック上のフレーム数。
         /// <para>
-        /// 既定のフレーム数は 1 です。
-        /// フレーム数 1 を指定することで、このメソッドをコールしたクラス名およびメソッド名を取得できます。
+        /// 既定のフレーム数は <c>1</c> です。
+        /// フレーム数に <c>1</c> を指定することで、このメソッドをコールしたクラス名およびメソッド名を取得できます。
         /// </para>
         /// </param>
         /// <returns>
-        /// 書式のクラス名およびメソッド名
+        /// このメソッドの呼び出し元のクラス名およびメソッド名。
         /// </returns>
         [DynamicSecurityMethod]
         private static string GetCallerName(DebugInfoCallerNameFormat format, int skipFrames = 1)
@@ -298,7 +253,7 @@ namespace BUILDLet.Standard.Diagnostics
         /// 現在のオブジェクトを表す文字列を返します。
         /// </summary>
         /// <returns>
-        /// デバッグ情報の文字列
+        /// 現在のオブジェクトを表す文字列文字列。
         /// </returns>
         public static new string ToString()
         {
