@@ -39,32 +39,71 @@ namespace BUILDLet.Standard.Diagnostics.Tests
 
 
         // for CallerName Tests
-        public class CallerNameTestParameter : TestParameter<string>
+        public abstract class CallerNameTestParameterBase : TestParameter<string>
         {
             public DebugInfoCallerNameFormat Format;
-            public string CallerName;
-
-            public override string Expected => this.CallerName;
+            public string ExpectedCallerName;
         }
 
+        public class GetCallerNameTestParameter : CallerNameTestParameterBase
+        {
+            public override void Arrange(out string expected)
+            {
+                // SET Expected
+                expected = this.ExpectedCallerName;
+
+                // Initialize DebugInfo
+                DebugInfo.Init(this.Format);
+            }
+
+            public override void Act(out string actual)
+            {
+                // GET Actual
+                actual = new DebugInfoTests().GetCallerNameTestMethod();
+            }
+        }
+
+        public string GetCallerNameTestMethod() => DebugInfo.GetCallerName();
+
+        public class CallerNameTestParameter : CallerNameTestParameterBase
+        {
+            public override void Arrange(out string expected)
+            {
+                // SET Expected
+                expected = this.ExpectedCallerName;
+            }
+
+            public override void Act(out string actual)
+            {
+                // GET Actual
+                actual = new DebugInfoTests().CallerNameTestMethod(this);
+            }
+        }
+
+        public string CallerNameTestMethod(CallerNameTestParameter param) => param.Format switch
+        {
+            DebugInfoCallerNameFormat.Name => DebugInfo.Name,
+            DebugInfoCallerNameFormat.ShortName => DebugInfo.ShortName,
+            DebugInfoCallerNameFormat.FullName => DebugInfo.FullName,
+            DebugInfoCallerNameFormat.ClassName => DebugInfo.ClassName,
+            DebugInfoCallerNameFormat.FullClassName => DebugInfo.FullClassName,
+            _ => throw new InvalidOperationException(),
+        };
+
         [DataTestMethod()]
-        [DataRow(DebugInfoCallerNameFormat.Name, nameof(GetCallerNameTest))]
-        [DataRow(DebugInfoCallerNameFormat.ShortName, "DebugInfoTests." + nameof(GetCallerNameTest))]
-        [DataRow(DebugInfoCallerNameFormat.FullName, "BUILDLet.Standard.Diagnostics.Tests.DebugInfoTests." + nameof(GetCallerNameTest))]
+        [DataRow(DebugInfoCallerNameFormat.Name, nameof(GetCallerNameTestMethod))]
+        [DataRow(DebugInfoCallerNameFormat.ShortName, "DebugInfoTests." + nameof(GetCallerNameTestMethod))]
+        [DataRow(DebugInfoCallerNameFormat.FullName, "BUILDLet.Standard.Diagnostics.Tests.DebugInfoTests." + nameof(GetCallerNameTestMethod))]
         [DataRow(DebugInfoCallerNameFormat.ClassName, "DebugInfoTests")]
         [DataRow(DebugInfoCallerNameFormat.FullClassName, "BUILDLet.Standard.Diagnostics.Tests.DebugInfoTests")]
         public void GetCallerNameTest(DebugInfoCallerNameFormat format, string caller)
         {
-            // ARRANGE
-            DebugInfo.Init(format);
-
-            // ACT
-            CallerNameTestParameter param = new CallerNameTestParameter()
+            // SET Parameter
+            GetCallerNameTestParameter param = new GetCallerNameTestParameter
             {
                 Keyword = format.ToString(),
                 Format = format,
-                CallerName = caller,
-                Actual = DebugInfo.GetCallerName(),
+                ExpectedCallerName = caller,
             };
 
             // ASSERT
@@ -72,79 +111,19 @@ namespace BUILDLet.Standard.Diagnostics.Tests
         }
 
         [DataTestMethod()]
-        [DataRow(DebugInfoCallerNameFormat.Name, nameof(CallerNameTest))]
-        [DataRow(DebugInfoCallerNameFormat.ShortName, "DebugInfoTests." + nameof(CallerNameTest))]
-        [DataRow(DebugInfoCallerNameFormat.FullName, "BUILDLet.Standard.Diagnostics.Tests.DebugInfoTests." + nameof(CallerNameTest))]
+        [DataRow(DebugInfoCallerNameFormat.Name, nameof(CallerNameTestMethod))]
+        [DataRow(DebugInfoCallerNameFormat.ShortName, "DebugInfoTests." + nameof(CallerNameTestMethod))]
+        [DataRow(DebugInfoCallerNameFormat.FullName, "BUILDLet.Standard.Diagnostics.Tests.DebugInfoTests." + nameof(CallerNameTestMethod))]
         [DataRow(DebugInfoCallerNameFormat.ClassName, "DebugInfoTests")]
         [DataRow(DebugInfoCallerNameFormat.FullClassName, "BUILDLet.Standard.Diagnostics.Tests.DebugInfoTests")]
         public void CallerNameTest(DebugInfoCallerNameFormat format, string caller)
         {
-            // ARRANGE
-            DebugInfo.Init(format);
-
+            // SET Parameter
             CallerNameTestParameter param = new CallerNameTestParameter()
             {
                 Keyword = format.ToString(),
                 Format = format,
-                CallerName = caller
-            };
-
-            // ACT
-            switch (param.Format)
-            {
-                case DebugInfoCallerNameFormat.Name:
-                    param.Actual = DebugInfo.Name;
-                    break;
-
-                case DebugInfoCallerNameFormat.ShortName:
-                    param.Actual = DebugInfo.ShortName;
-                    break;
-
-                case DebugInfoCallerNameFormat.FullName:
-                    param.Actual = DebugInfo.FullName;
-                    break;
-
-                case DebugInfoCallerNameFormat.ClassName:
-                    param.Actual = DebugInfo.ClassName;
-                    break;
-
-                case DebugInfoCallerNameFormat.FullClassName:
-                    param.Actual = DebugInfo.FullClassName;
-                    break;
-
-                default:
-                    break;
-            }
-
-            // ASSERT
-            param.Assert();
-        }
-
-
-        [TestMethod()]
-        public static void CallerNameHierarchicalTest()
-        {
-            CallerNameHierarchicalTest1();
-        }
-
-        private static void CallerNameHierarchicalTest1()
-        {
-            CallerNameHierarchicalTest2();
-        }
-
-        private static void CallerNameHierarchicalTest2()
-        {
-            CallerNameHierarchicalTest3();
-        }
-
-        private static void CallerNameHierarchicalTest3()
-        {
-            // ARRANGE & ACT
-            CallerNameTestParameter param = new CallerNameTestParameter()
-            {
-                Format = DebugInfoCallerNameFormat.ShortName,
-                CallerName = "DebugInfoTests.CallerNameHierarchicalTest3",
-                Actual = DebugInfo.ShortName,
+                ExpectedCallerName = caller
             };
 
             // ASSERT
@@ -153,7 +132,7 @@ namespace BUILDLet.Standard.Diagnostics.Tests
 
 
         [TestMethod()]
-        [TestCategory("Exception Test")]
+        [TestCategory("Exception")]
         [ExpectedException(typeof(FormatException))]
         public void TimeStampFormatExceptionTest()
         {
@@ -162,15 +141,107 @@ namespace BUILDLet.Standard.Diagnostics.Tests
 
 
         // for TimeStamp Tests
-        public class TimeStampTestParameter : TestParameter<string>
+        public abstract class TimeStampTestParameterBase : TestParameter<string>
         {
             public string Format;
-            public CultureInfo CultureInfo;
-
-            public override string Expected => DateTime.Now.ToString(
-                (string.IsNullOrEmpty(this.Format)) ? "yyyy/MM/dd-HH:mm:ss" : this.Format,
-                (this.CultureInfo is null) ? new CultureInfo("en-US") : this.CultureInfo);
+            public string CultureName;
         }
+
+        // for GetTimeStamp Tests
+        public class GetTimeStampTestParameter : TimeStampTestParameterBase
+        {
+            public override void Arrange(out string expected)
+            {
+                // SET Expected
+                expected = DateTime.Now.ToString(
+                    (string.IsNullOrEmpty(this.Format)) ? "yyyy/MM/dd-HH:mm:ss" : this.Format,
+                    (this.CultureName is null) ? new CultureInfo("en-US") : new CultureInfo(this.CultureName));
+
+
+                // Initialize DebugInfo
+                if (this.Format is null)
+                {
+                    if (this.CultureName is null)
+                    {
+                        DebugInfo.Init();
+                    }
+                    else
+                    {
+                        DebugInfo.Init(culture: new CultureInfo(this.CultureName));
+                    }
+                }
+                else
+                {
+                    if (this.CultureName is null)
+                    {
+                        DebugInfo.Init(format: this.Format);
+                    }
+                    else
+                    {
+                        DebugInfo.Init(format: this.Format, culture: new CultureInfo(this.CultureName));
+                    }
+                }
+            }
+
+            public override void Act(out string actual)
+            {
+                // GET Actual
+                actual = DebugInfo.GetTimeStamp();
+            }
+        }
+
+        // for Date Tests
+        public class DateTestParameter : TimeStampTestParameterBase
+        {
+            public override void Arrange(out string expected)
+            {
+                // SET Expected
+                expected = System.DateTime.Now.ToString(this.Format, new CultureInfo(this.CultureName));
+            }
+
+            public override void Act(out string actual)
+            {
+                // GET Actual
+                actual = DebugInfo.Date;
+            }
+        }
+
+        // for Time Tests
+        public class TimeTestParameter : TimeStampTestParameterBase
+        {
+            public override void Arrange(out string expected)
+            {
+                // SET Expected
+                expected = System.DateTime.Now.ToString(this.Format, new CultureInfo(this.CultureName));
+            }
+
+            public override void Act(out string actual)
+            {
+                // GET Actual
+                actual = DebugInfo.Time;
+            }
+        }
+
+        // for ToString Tests
+        public class ToStringTestParameter : TimeStampTestParameterBase
+        {
+            public string CallerName;
+
+            public override void Arrange(out string expected)
+            {
+                // SET Expected
+                expected = System.DateTime.Now.ToString("yyyy/MM/dd-HH:mm:ss", new CultureInfo("en-US")) + "," + this.CallerName;
+            }
+
+            public override void Act(out string actual)
+            {
+                // GET Actual
+                actual = new DebugInfoTests().ToStringTestMethod();
+            }
+        }
+
+        public string ToStringTestMethod() => DebugInfo.ToString();
+
 
         [DataTestMethod()]
         [DataRow(null, null, DisplayName = "Default")]
@@ -181,86 +252,46 @@ namespace BUILDLet.Standard.Diagnostics.Tests
         [DataRow("F", "ja-JP")]
         public void GetTimeStampTest(string format, string cultureName)
         {
-            // ARRANGE
-            if (format is null)
-            {
-                if (cultureName is null)
-                {
-                    DebugInfo.Init();
-                }
-                else
-                {
-                    DebugInfo.Init(culture: new CultureInfo(cultureName));
-                }
-            }
-            else
-            {
-                if (cultureName is null)
-                {
-                    DebugInfo.Init(format: format);
-                }
-                else
-                {
-                    DebugInfo.Init(format: format, culture: new CultureInfo(cultureName));
-                }
-            }
-
-            // ACT
-            TimeStampTestParameter param = new TimeStampTestParameter()
+            // SET Parameter
+            GetTimeStampTestParameter param = new GetTimeStampTestParameter
             {
                 Keyword = (format is null ? "Default" : $"\"{format}\"") + " (" + (cultureName is null ? "Default" : $"\"{cultureName}\"") + ")",
                 Format = format,
-                CultureInfo = cultureName is null ? null : new CultureInfo(cultureName),
-                Actual = DebugInfo.GetTimeStamp()
+                CultureName = cultureName,
             };
 
             // ASSERT
             param.Assert();
         }
 
-
-        // for Date & Time Tests
-        public class DateTimeTestParameter : TimeStampTestParameter
-        {
-            public override string Expected => System.DateTime.Now.ToString(this.Format, this.CultureInfo);
-        }
 
         [TestMethod()]
         public void DateTest()
         {
-            // ARRANGE & ACT
-            DateTimeTestParameter param = new DateTimeTestParameter()
+            // SET Parameter
+            DateTestParameter param = new DateTestParameter
             {
                 Format = "yyyy/MM/dd",
-                CultureInfo = new CultureInfo("en-US"),
-                Actual = DebugInfo.Date
+                CultureName = "en-US",
             };
 
             // ASSERT
             param.Assert();
         }
+
 
         [TestMethod()]
         public void TimeTest()
         {
-            // ARRANGE & ACT
-            DateTimeTestParameter param = new DateTimeTestParameter()
+            // SET Parameter
+            TimeTestParameter param = new TimeTestParameter()
             {
                 Format = "HH:mm:ss",
-                CultureInfo = new CultureInfo("en-US"),
-                Actual = DebugInfo.Time
+                CultureName = "en-US",
             };
 
             // ASSERT
             param.Assert();
-        }
-
-
-        public class ToStringTestParameter : TestParameter<string>
-        {
-            public string CallerName;
-
-            public override string Expected => System.DateTime.Now.ToString("yyyy/MM/dd-HH:mm:ss", new CultureInfo("en-US")) + "," + this.CallerName;
         }
 
         [TestMethod()]
@@ -269,8 +300,7 @@ namespace BUILDLet.Standard.Diagnostics.Tests
             // ARRANGE & ACT
             ToStringTestParameter param = new ToStringTestParameter
             {
-                CallerName = "BUILDLet.Standard.Diagnostics.Tests.DebugInfoTests.ToStringTest",
-                Actual = DebugInfo.ToString(),
+                CallerName = "BUILDLet.Standard.Diagnostics.Tests.DebugInfoTests.ToStringTestMethod",
             };
 
             // ASSERT
