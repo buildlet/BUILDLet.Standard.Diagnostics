@@ -31,7 +31,7 @@ namespace BUILDLet.Standard.Diagnostics.Tests
     [TestClass]
     public class DebugInfoTests
     {
-        [TestInitialize()]
+        [TestInitialize]
         public void InitializeDebugInfo()
         {
             DebugInfo.Init();
@@ -59,11 +59,11 @@ namespace BUILDLet.Standard.Diagnostics.Tests
             public override void Act(out string actual)
             {
                 // GET Actual
-                actual = new DebugInfoTests().GetCallerNameTestMethod();
+                actual = GetCallerNameTestMethod();
             }
         }
 
-        public string GetCallerNameTestMethod() => DebugInfo.GetCallerName();
+        public static string GetCallerNameTestMethod() => DebugInfo.GetCallerName();
 
         public class CallerNameTestParameter : CallerNameTestParameterBase
         {
@@ -76,11 +76,11 @@ namespace BUILDLet.Standard.Diagnostics.Tests
             public override void Act(out string actual)
             {
                 // GET Actual
-                actual = new DebugInfoTests().CallerNameTestMethod(this);
+                actual = CallerNameTestMethod(this);
             }
         }
 
-        public string CallerNameTestMethod(CallerNameTestParameter param) => param.Format switch
+        public static string CallerNameTestMethod(CallerNameTestParameter param) => param.Format switch
         {
             DebugInfoCallerNameFormat.Name => DebugInfo.Name,
             DebugInfoCallerNameFormat.ShortName => DebugInfo.ShortName,
@@ -90,7 +90,7 @@ namespace BUILDLet.Standard.Diagnostics.Tests
             _ => throw new InvalidOperationException(),
         };
 
-        [DataTestMethod()]
+        [DataTestMethod]
         [DataRow(DebugInfoCallerNameFormat.Name, nameof(GetCallerNameTestMethod))]
         [DataRow(DebugInfoCallerNameFormat.ShortName, "DebugInfoTests." + nameof(GetCallerNameTestMethod))]
         [DataRow(DebugInfoCallerNameFormat.FullName, "BUILDLet.Standard.Diagnostics.Tests.DebugInfoTests." + nameof(GetCallerNameTestMethod))]
@@ -107,10 +107,10 @@ namespace BUILDLet.Standard.Diagnostics.Tests
             };
 
             // ASSERT
-            param.Assert();
+            param.Validate();
         }
 
-        [DataTestMethod()]
+        [DataTestMethod]
         [DataRow(DebugInfoCallerNameFormat.Name, nameof(CallerNameTestMethod))]
         [DataRow(DebugInfoCallerNameFormat.ShortName, "DebugInfoTests." + nameof(CallerNameTestMethod))]
         [DataRow(DebugInfoCallerNameFormat.FullName, "BUILDLet.Standard.Diagnostics.Tests.DebugInfoTests." + nameof(CallerNameTestMethod))]
@@ -127,11 +127,11 @@ namespace BUILDLet.Standard.Diagnostics.Tests
             };
 
             // ASSERT
-            param.Assert();
+            param.Validate();
         }
 
 
-        [TestMethod()]
+        [TestMethod]
         [TestCategory("Exception")]
         [ExpectedException(typeof(FormatException))]
         public void TimeStampFormatExceptionTest()
@@ -243,7 +243,7 @@ namespace BUILDLet.Standard.Diagnostics.Tests
         public string ToStringTestMethod() => DebugInfo.ToString();
 
 
-        [DataTestMethod()]
+        [DataTestMethod]
         [DataRow(null, null, DisplayName = "Default")]
         [DataRow(null, "ja-JP")]
         [DataRow("G", null)]
@@ -261,11 +261,11 @@ namespace BUILDLet.Standard.Diagnostics.Tests
             };
 
             // ASSERT
-            param.Assert();
+            param.Validate();
         }
 
 
-        [TestMethod()]
+        [TestMethod]
         public void DateTest()
         {
             // SET Parameter
@@ -276,11 +276,11 @@ namespace BUILDLet.Standard.Diagnostics.Tests
             };
 
             // ASSERT
-            param.Assert();
+            param.Validate();
         }
 
 
-        [TestMethod()]
+        [TestMethod]
         public void TimeTest()
         {
             // SET Parameter
@@ -291,10 +291,10 @@ namespace BUILDLet.Standard.Diagnostics.Tests
             };
 
             // ASSERT
-            param.Assert();
+            param.Validate();
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void ToStringTest()
         {
             // ARRANGE & ACT
@@ -304,7 +304,7 @@ namespace BUILDLet.Standard.Diagnostics.Tests
             };
 
             // ASSERT
-            param.Assert();
+            param.Validate();
         }
     }
 }
