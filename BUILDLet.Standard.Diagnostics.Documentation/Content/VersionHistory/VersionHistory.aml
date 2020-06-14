@@ -12,8 +12,9 @@
 		<section>
 			<title>Version History</title>
 			<content>
-				<para>Select a version below to see a description of its changes.</para>
-
+				<para>
+          Select a version below to see a description of its changes.
+        </para>
 				<list class="bullet">
 
           <!-- Version 1.0.4.0 -->
@@ -41,6 +42,13 @@
           <listItem>
             <para>
               <link xlink:href="027a75aa-b7c6-4c5f-b567-d2626fc7cbc4" />
+            </para>
+          </listItem>
+
+          <!-- Version 1.4.0.0 -->
+          <listItem>
+            <para>
+              <link xlink:href="9e757fd0-40af-460e-8e7c-d538c977ef3e" />
             </para>
           </listItem>
 

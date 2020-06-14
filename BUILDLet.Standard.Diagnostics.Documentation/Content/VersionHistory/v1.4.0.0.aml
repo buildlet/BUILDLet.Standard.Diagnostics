@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="9e757fd0-40af-460e-8e7c-d538c977ef3e" revisionNumber="1">
+	<developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<introduction>
+			<para>
+        Version 1.4.0.0 was released on June 13, 2020.
+      </para>
+		</introduction>
+
+		<section>
+			<title>Changes in This Release</title>
+			<content>
+
+				<list class="bullet">
+
+          <listItem>
+            <para>
+              Refactoring for whole part was done.
+            </para>
+          </listItem>
+
+          <listItem>
+            <para>
+              <codeEntityReference linkText="BUILDLet.Standard.Diagnostics.DebugInfo.Date">P:BUILDLet.Standard.Diagnostics.DebugInfo.Date</codeEntityReference> and
+              <codeEntityReference linkText="BUILDLet.Standard.Diagnostics.DebugInfo.DateTime">P:BUILDLet.Standard.Diagnostics.DebugInfo.DateTime</codeEntityReference>
+               were changed into <codeInline>"yyyy-MM-dd"</codeInline> and <codeInline>"yyyy-MM-dd HH:mm:ss"</codeInline> respectively from
+               <codeInline>"yyyy/MM/dd"</codeInline> and <codeInline>"yyyy/MM/dd-HH:mm:ss"</codeInline>.
+            </para>
+          </listItem>
+
+          <listItem>
+            <para>
+              Default value of Constant value of
+              <codeEntityReference linkText="BUILDLet.Standard.Diagnostics.DebugInfo.TimeStampFormat">P:BUILDLet.Standard.Diagnostics.DebugInfo.TimeStampFormat</codeEntityReference>
+              was changed into <codeInline>"yyyy-MM-dd HH:mm:ss"</codeInline> from <codeInline>"yyyy/MM/dd-HH:mm:ss"</codeInline>.
+            </para>
+          </listItem>
+
+          <listItem>
+            <para>
+              Constant value of <codeInline>BUILDLet.Standard.Diagnostics.DebugInfo.DefaultTimeStampFormat</codeInline> and
+              <codeInline>BUILDLet.Standard.Diagnostics.DebugInfo.DefaultCallerNameFormat</codeInline> were removed.
+            </para>
+          </listItem>
+
+          <listItem>
+            <para>
+              Static method of <codeInline>BUILDLet.Standard.Diagnostics.DebugInfo.Init(DebugInfoCallerNameFormat, string, CultureInfo)</codeInline> was removed.
+            </para>
+          </listItem>
+
+          <listItem>
+            <para>
+              Static method of <codeInline>BUILDLet.Standard.Diagnostics.DebugInfo.GetTimeStamp</codeInline> and
+              <codeInline>BUILDLet.Standard.Diagnostics.DebugInfo.GetCallerName</codeInline> were removed.
+            </para>
+          </listItem>
+
+          <listItem>
+            <para>
+              Static property of <codeInline>DefaultCultureInfo</codeInline> was removed, and initial state of
+              <codeEntityReference linkText="BUILDLet.Standard.Diagnostics.DebugInfo.CultureInfo">P:BUILDLet.Standard.Diagnostics.DebugInfo.CultureInfo</codeEntityReference>
+              was changed into <codeEntityReference>P:System.Globalization.CultureInfo.InvariantCulture</codeEntityReference>
+              from <codeEntityReference>T:System.Globalization.CultureInfo</codeEntityReference> of <codeInline>"en-US"</codeInline>.
+            </para>
+          </listItem>
+
+          <listItem>
+            <para>
+              Static property of <codeEntityReference linkText="BUILDLet.Standard.Diagnostics.DebugInfo.Delimiter">P:BUILDLet.Standard.Diagnostics.DebugInfo.Delimiter</codeEntityReference>
+              was added.
+            </para>
+          </listItem>
+
+        </list>
+
+			</content>
+		</section>
+
+		<relatedTopics>
+			<link xlink:href="ceb4a480-ad5e-40fa-a04c-012d8cec8837" />
+		</relatedTopics>
+
+	</developerConceptualDocument>
+</topic>
