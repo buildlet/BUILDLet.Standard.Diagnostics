@@ -3,7 +3,7 @@
 	<developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
 		<introduction>
       <para>
-        The topics in this section describe the various changes made to the
+        The topics in this section describe the various changes made to
         <application>BUILDLet Class Library (Diagnostics) for .NET Standard</application>
         over the life of the project.
       </para>
@@ -66,10 +66,17 @@
             </para>
           </listItem>
 
-          <!-- Version 1.6 -->
+          <!-- Version 1.6.0 -->
           <listItem>
             <para>
               <link xlink:href="b239f57c-5ee1-46ea-93d1-2e31cdd5fb23" />
+            </para>
+          </listItem>
+
+          <!-- Version 1.6.5 -->
+          <listItem>
+            <para>
+              <link xlink:href="918937ca-9d23-433b-893b-695f06d4703e" />
             </para>
           </listItem>
 
@@ -82,7 +89,6 @@
           -->
 
         </list>
-
 			</content>
 		</section>
 

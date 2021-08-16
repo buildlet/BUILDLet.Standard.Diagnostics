@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<topic id="f0b9b705-e7e7-4952-be95-6ee03af4f4ea" revisionNumber="2">
+<topic id="918937ca-9d23-433b-893b-695f06d4703e" revisionNumber="2">
 	<developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
 		<introduction>
 			<para>
-        Version 1.2.0.0 was released on January 11, 2020.
+				Version 1.6.5 was released on August 16, 2021.
 			</para>
 		</introduction>
 
@@ -12,19 +12,18 @@
 			<content>
 				<list class="bullet">
 
-          <listItem>
+					<listItem>
 						<para>
-              Only refactoring, and update of unit testing are included in this update.
+              Minor Update (NuGet packages were updated.)
             </para>
 					</listItem>
 
-        </list>
+				</list>
 			</content>
 		</section>
 
 		<relatedTopics>
 			<link xlink:href="ceb4a480-ad5e-40fa-a04c-012d8cec8837" />
 		</relatedTopics>
-
 	</developerConceptualDocument>
 </topic>

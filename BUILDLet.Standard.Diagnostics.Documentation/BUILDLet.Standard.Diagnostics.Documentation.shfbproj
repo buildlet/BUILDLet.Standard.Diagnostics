@@ -12,7 +12,7 @@
     <RootNamespace>BUILDLet.Standard.Diagnostics.Documentation</RootNamespace>
     <Name>BUILDLet.Standard.Diagnostics.Documentation</Name>
     <!-- SHFB properties -->
-    <FrameworkVersion>Cross-platform (.NET Core/.NET Standard)</FrameworkVersion>
+    <FrameworkVersion>.NET Core/.NET Standard/.NET 5.0+</FrameworkVersion>
     <OutputPath>.\Help\</OutputPath>
     <HtmlHelpName>BUILDLet.Standard.Diagnostics</HtmlHelpName>
     <Language>en-US</Language>
@@ -35,7 +35,7 @@
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
     <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
     <HelpTitle>BUILDLet Class Library %28Diagnostics%29 for .NET Standard</HelpTitle>
-    <HelpFileVersion>1.6.0.0</HelpFileVersion>
+    <HelpFileVersion>1.6.6.0</HelpFileVersion>
     <NamingMethod>Guid</NamingMethod>
     <ContentPlacement>AboveNamespaces</ContentPlacement>
     <RootNamespaceContainer>False</RootNamespaceContainer>
@@ -73,7 +73,9 @@
     <Folder Include="media" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Content\VersionHistory\v1.6.aml" />
+    <None Include="Content\VersionHistory\v1.6.6.aml" />
+    <None Include="Content\VersionHistory\v1.6.5.aml" />
+    <None Include="Content\VersionHistory\v1.6.0.aml" />
     <None Include="Content\VersionHistory\v1.5.1.aml" />
     <None Include="Content\VersionHistory\v1.4.1.aml" />
     <None Include="Content\VersionHistory\v1.4.0.0.aml" />

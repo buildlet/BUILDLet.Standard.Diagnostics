@@ -10,15 +10,15 @@
 		<section>
 			<title>Changes in This Release</title>
 			<content>
-
 				<list class="bullet">
+          
 					<listItem>
 						<para>
 							Unit tests and packages used for it were updated.
 						</para>
 					</listItem>
-				</list>
 
+        </list>
 			</content>
 		</section>
 
