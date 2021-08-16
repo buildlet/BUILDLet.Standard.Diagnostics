@@ -10,8 +10,8 @@
 		<section>
 			<title>Changes in This Release</title>
 			<content>
-
 				<list class="bullet">
+          
 					<listItem>
 						<para>
               1st Release.
@@ -19,7 +19,6 @@
 					</listItem>
 
 				</list>
-
 			</content>
 		</section>
 

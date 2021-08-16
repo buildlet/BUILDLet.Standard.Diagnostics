@@ -1,16 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<topic id="b239f57c-5ee1-46ea-93d1-2e31cdd5fb23" revisionNumber="1">
+<topic id="b239f57c-5ee1-46ea-93d1-2e31cdd5fb23" revisionNumber="2">
 	<developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
 		<introduction>
 			<para>
-        Version 1.6 was released on June 20, 2021.
+        Version 1.6.0 was released on June 20, 2021.
       </para>
 		</introduction>
 
 		<section>
 			<title>Changes in This Release</title>
 			<content>
-
 				<list class="bullet">
 
           <listItem>
@@ -21,7 +20,6 @@
           </listItem>
 
         </list>
-
 			</content>
 		</section>
 
